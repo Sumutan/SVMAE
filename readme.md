@@ -14,7 +14,9 @@ This repository contains the official implementation of _Scene-aware Probabilist
 [//]: # (We found that a simple assembly of foundation models suffers from severe language ambiguity. )
 [//]: # (Therefore, we introduce hybrid prompts derived from domain expert knowledge and target image context to alleviate the language ambiguity. )
 
-To enhance visual feature extraction, we propose the Surveillance Video Masked Autoencoder (SVMAE) framework. It uses scene-aware probabilistic masking and perspective reconstruction loss for efficient pre-training. A large-scale real surveillance video dataset is collected to pre-train SVMAE for anomaly detection. For video anomaly detection, scene-aware token fusion reduces spatiotemporal redundancy and focuses on event-relevant features. Additionally, a dual encoder architecture, integrating motion and spatial semantics through an auxiliary image encoder, is employed. 
+To enhance visual feature extraction, we propose the Surveillance Video Masked Autoencoder (SVMAE) framework. 
+It uses scene-aware probabilistic masking and perspective reconstruction loss for efficient pre-training. 
+Additionally, a dual encoder architecture with scene-aware token fusion is proposed for video anomaly detection.
 
 The framework is depicted below:
 
@@ -24,45 +26,63 @@ The framework is depicted below:
 
 ## Quick Start
 
-### :bank:Dataset Preparation
+Coming soon！
 
-We evaluate FRD-UVAD on four public datasets: Shanghaitech, CUHK Avenue and UCF-Crime.  
+[//]: # ()
+[//]: # (### :bank:Dataset Preparation)
 
-Download ucf-crime train features from here:[https://pan.quark.cn/s/e978fc6a90c8], test features from C2FPL:[Concat_test_10.npy](https://mbzuaiac-my.sharepoint.com/personal/anas_al-lahham_mbzuai_ac_ae/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fanas%5Fal%2Dlahham%5Fmbzuai%5Fac%5Fae%2FDocuments%2FApplications%2FPaper%20Submissions%2FCVPR%202024%2Fconcatenated%5Ffeatures&ga=1)**
+[//]: # ()
+[//]: # (We evaluate FRD-UVAD on four public datasets: Shanghaitech, CUHK Avenue and UCF-Crime.  )
 
+[//]: # ()
+[//]: # (Download ucf-crime train features from here:[https://pan.quark.cn/s/e978fc6a90c8], test features from C2FPL:[Concat_test_10.npy]&#40;https://mbzuaiac-my.sharepoint.com/personal/anas_al-lahham_mbzuai_ac_ae/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fanas%5Fal%2Dlahham%5Fmbzuai%5Fac%5Fae%2FDocuments%2FApplications%2FPaper%20Submissions%2FCVPR%202024%2Fconcatenated%5Ffeatures&ga=1&#41;**)
 
-### :hammer:Environment Setup
+[//]: # ()
+[//]: # ()
+[//]: # (### :hammer:Environment Setup)
 
-Run `conda env create -f environment.yaml` to install the requirements.
+[//]: # ()
+[//]: # (Run `conda env create -f environment.yaml` to install the requirements.)
 
+[//]: # ()
+[//]: # ()
+[//]: # (### :page_facing_up:Repeat the public results)
 
-### :page_facing_up:Repeat the public results
+[//]: # ()
+[//]: # (**To train FRD-UVAD from scratch on UCF-Crime:**)
 
-**To train FRD-UVAD from scratch on UCF-Crime:**
+[//]: # ()
+[//]: # (```)
 
-```
-python main.py --dataset_name ucfcrime --feature_pretrain_model i3d --feature_modal rgb --cross_clip 4 --lab False --lab_type wlab --beta 0.1 --delta 0.5 --Vitblock_num 8 --max_seqlen 320 --max_epoch 5 --Lambda 1_1_1
-```
+[//]: # (python main.py --dataset_name ucfcrime --feature_pretrain_model i3d --feature_modal rgb --cross_clip 4 --lab False --lab_type wlab --beta 0.1 --delta 0.5 --Vitblock_num 8 --max_seqlen 320 --max_epoch 5 --Lambda 1_1_1)
 
+[//]: # (```)
 
-**To inference FRD-UVAD without auxiliary scorer,whose AUC is 77.56\%:**
+[//]: # ()
+[//]: # ()
+[//]: # (**To inference FRD-UVAD without auxiliary scorer,whose AUC is 77.56\%:**)
 
-```python run_test.py --ckpt_path best_ckpt/best_ckpt_0.7756.pkl```
+[//]: # ()
+[//]: # (```python run_test.py --ckpt_path best_ckpt/best_ckpt_0.7756.pkl```)
 
+[//]: # ()
+[//]: # ()
+[//]: # (**To inference FRD-UVAD with FRD-UVAD&#40;1 crop&#41; as auxiliary scorer,whose AUC is 80.72\%:**)
 
-**To inference FRD-UVAD with FRD-UVAD(1 crop) as auxiliary scorer,whose AUC is 80.72\%:**
+[//]: # ()
+[//]: # (```python run_test.py --ckpt_path best_ckpt/best_ckpt_0.8072.pkl```)
 
-```python run_test.py --ckpt_path best_ckpt/best_ckpt_0.8072.pkl```
+[//]: # ()
+[//]: # ()
+[//]: # (**To inference FRD-UVAD with [C2FPL]&#40;https://github.com/AnasEmad11/C2FPL&#41; as auxiliary scorer,whose AUC is 82.12\%:**)
 
-
-**To inference FRD-UVAD with [C2FPL](https://github.com/AnasEmad11/C2FPL) as auxiliary scorer,whose AUC is 82.12\%:**
-
-```python run_test.py --ckpt_path best_ckpt/best_ckpt_0.8212.pkl```
+[//]: # ()
+[//]: # (```python run_test.py --ckpt_path best_ckpt/best_ckpt_0.8212.pkl```)
 
 
 ## :dart:Performance
 ![Results](assets/performance.png)
-![Qualitative Results](assets/SVMAE-official/assets/ResultVisualization_3.png)
+![Qualitative Results](assets/ResultVisualization_3.png)
 
 
 ## 💘 Acknowledgements
