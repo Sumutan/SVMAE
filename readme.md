@@ -10,7 +10,7 @@ This repository contains the official implementation of _Scene-aware Probabilist
 - _Scene-aware Probabilistic Masking and Fusion for Video Anomaly Detection_ is under peer review.
 
 
-## :gem:cFramework
+## :gem:Framework
 [//]: # (We found that a simple assembly of foundation models suffers from severe language ambiguity. )
 [//]: # (Therefore, we introduce hybrid prompts derived from domain expert knowledge and target image context to alleviate the language ambiguity. )
 
@@ -26,7 +26,34 @@ The framework is depicted below:
 
 ## Quick Start
 
-Coming soon！
+### Visual features and Caption Embedings.
+1. You can download from [here](https://pan.quark.cn/s/85d261a1b699).
+2. For UCF-Crime dataset, put the generated/downloaded features under `./save/Crime` folder. Other datasets follow the same structure.
+3. For UCF-Crime dataset, change the path of visual features in `./list/ucf-videoMae-CLIP-L_UCF_9-5_9-1_finetune_dif_0.5_SP_norm_a0.05_fast.list` and `list/ucf-videoMae-test-CLIP-L_UCF_9-5_9-1_finetune_dif_0.5_SP_norm_a0.05_fast.list`. Other datasets follow the same structure.
+
+### Install requirements
+Run `pip install -r requirement.txt` to install the requirements.
+
+### Run visdom
+**!!!VERY IMPORTANT!!!**
+
+Open a separate terminal and run `visdom` after installing the requirements before running the following commands.
+
+### Training + Testing
+Meanings of the arguments can be seen in `option.py`. To train the best model presented in the paper, use the following settings:
+
+**UCF-Crime dataset**
+
+Training
+```bash
+bash run.sh
+```
+
+Testing only 
+```bash
+bash run_test.sh
+```
+More are coming soon！
 
 [//]: # ()
 [//]: # (### :bank:Dataset Preparation)
